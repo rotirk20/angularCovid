@@ -1,0 +1,19 @@
+<mat-sidenav-container class="example-container">
+    <app-toolbar (toggleSidenav)="sidenav.toggle()"></app-toolbar>
+
+    <mat-sidenav #sidenav class="example-sidenav">
+        <mat-toolbar>
+            <span>More</span>
+            <span class="example-spacer"></span>
+        </mat-toolbar>
+        <mat-list>
+            <mat-list-item> Covid19 </mat-list-item>
+            <mat-list-item> Air quality </mat-list-item>
+            <mat-list-item> Weather forecast </mat-list-item>
+        </mat-list>
+    </mat-sidenav>
+
+    <div class="example-sidenav-content">
+        <app-main-content></app-main-content>
+    </div>
+</mat-sidenav-container>

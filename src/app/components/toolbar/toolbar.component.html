@@ -1,20 +1,32 @@
 <mat-toolbar class="mat-elevation-z1">
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-     <mat-icon>menu</mat-icon>
-   </button>
-   <span>Covid19 - Statistics</span>
-   <span class="align-space"></span>
-   <button mat-icon-button class="example-icon" [matMenuTriggerFor]="menu" aria-label="Example icon-button with share icon">
-    <mat-icon>share</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item>
-      <mat-icon>facebook</mat-icon>
-      <span>Facebook</span>
+    <button mat-icon-button class="example-icon" (click)="toggleSidenav.emit()"
+        aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
     </button>
-    <button mat-menu-item>
-      <img class="twitter" src="assets/images/twitter.png">
-      <span>Twitter</span>
+    <span>Covid19 - Statistics</span>
+    <span class="align-space"></span>
+    <mat-form-field class="example-full-width">
+        <input type="text" placeholder="Pick one country" aria-label="Number" matInput [formControl]="myControl"
+            [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectHandler($event)">
+            <mat-option *ngFor="let country of filteredCountries | async" [value]="country.country">
+                {{country.country}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+    <button mat-icon-button class="example-icon" [matMenuTriggerFor]="menu"
+        aria-label="Example icon-button with share icon">
+        <mat-icon>share</mat-icon>
     </button>
-  </mat-menu>
- </mat-toolbar>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+            <mat-icon>facebook</mat-icon>
+            <span>Facebook</span>
+        </button>
+        <button mat-menu-item>
+            <img class="twitter" src="assets/images/twitter.png">
+            <span>Twitter</span>
+        </button>
+    </mat-menu>
+</mat-toolbar>

@@ -6,24 +6,32 @@ import { AppComponent } from './app.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { MainContentComponent } from './components/main-content/main-content.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CovidService } from './services/covid.service';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { SideNavComponent } from './components/side-nav/side-nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
     MainContentComponent,
+    SideNavComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FormsModule
+    FlexLayoutModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [CovidService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
