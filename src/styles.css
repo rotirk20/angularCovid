@@ -12,3 +12,15 @@ body {
 .mt-10 {
     margin-top:1em;
 }
+
+.d-flex {
+    display:flex!important;
+    flex-wrap: wrap;
+}
+
+.d-inline {
+    display:inline;
+}
+.padding-0 {
+    padding:0!important;
+}

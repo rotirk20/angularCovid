@@ -2,8 +2,9 @@ import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/cor
 import { MatMenuTrigger } from '@angular/material/menu';
 import { FormControl } from '@angular/forms';
 import { CovidService } from 'src/app/services/covid.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { debounceTime, map, startWith } from 'rxjs/operators';
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-toolbar',
@@ -17,7 +18,8 @@ export class ToolbarComponent implements OnInit {
   countries = [];
   filteredCountries: Observable<string[]>;
   selectedCountry;
-  constructor(public covidService: CovidService) {
+  isSmallScreen;
+  constructor(public covidService: CovidService, private breakpointObserver: BreakpointObserver) {
     this.covidService.countries().subscribe((countries: any) => {
       this.countries = countries;
     });
@@ -30,6 +32,14 @@ export class ToolbarComponent implements OnInit {
         debounceTime(100),
         map(value => this._filter(value)),
       );
+    this.breakpointObserver.observe(['(max-width: 720px)'])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          this.isSmallScreen = true;
+        } else {
+          this.isSmallScreen = false;
+        }
+      });
   }
 
   public selectHandler(event): void {
@@ -41,6 +51,7 @@ export class ToolbarComponent implements OnInit {
     const filterValue = value.toLowerCase();
     return this.countries.filter(option => option.country.toLowerCase().includes(filterValue));
   }
+
 
   openMenu() {
     this.trigger.openMenu();

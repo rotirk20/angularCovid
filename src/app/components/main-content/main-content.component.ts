@@ -17,11 +17,13 @@ export class MainContentComponent implements OnInit {
   loading: boolean;
   flag: any;
   selectedCountryName: any;
+  todayCases: any;
   constructor(public covidService: CovidService) { }
 
   ngOnInit(): void {
     this.covidService.worldStats().subscribe((stats: any) => {
       this.activeWorld = stats.active;
+      this.todayCases = stats.todayCases;
       this.casesWorld = stats.cases;
       this.recoveredWorld = stats.recovered;
       this.deathsWorld = stats.deaths;
@@ -33,6 +35,7 @@ export class MainContentComponent implements OnInit {
         this.covidService.getStatsByCountry(this.selectedCountry).subscribe((country: any) => {
           this.selectedCountryName = country.country;
           this.activeWorld = country.active;
+          this.todayCases = country.todayCases;
           this.casesWorld = country.cases;
           this.recoveredWorld = country.recovered;
           this.deathsWorld = country.deaths;

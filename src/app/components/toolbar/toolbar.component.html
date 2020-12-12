@@ -3,7 +3,7 @@
         aria-label="Example icon-button with menu icon">
         <mat-icon>menu</mat-icon>
     </button>
-    <span>Covid19 - Statistics</span>
+    <span *ngIf="!isSmallScreen">Covid19 - Statistics</span>
     <span class="align-space"></span>
     <mat-form-field class="example-full-width">
         <input type="text" placeholder="Pick one country" aria-label="Number" matInput [formControl]="myControl"
