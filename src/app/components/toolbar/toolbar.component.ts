@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 import { CovidService } from 'src/app/services/covid.service';
 import { Observable } from 'rxjs';
 import { debounceTime, map, startWith } from 'rxjs/operators';
-import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-toolbar',
@@ -29,7 +29,7 @@ export class ToolbarComponent implements OnInit {
     this.filteredCountries = this.myControl.valueChanges
       .pipe(
         startWith(''),
-        debounceTime(100),
+        debounceTime(200),
         map(value => this._filter(value)),
       );
     this.breakpointObserver.observe(['(max-width: 720px)'])
@@ -40,6 +40,9 @@ export class ToolbarComponent implements OnInit {
           this.isSmallScreen = false;
         }
       });
+    this.covidService.currentMessage.subscribe(selectedCountry => {
+      this.myControl.setValue(selectedCountry);
+    });
   }
 
   public selectHandler(event): void {
@@ -51,7 +54,6 @@ export class ToolbarComponent implements OnInit {
     const filterValue = value.toLowerCase();
     return this.countries.filter(option => option.country.toLowerCase().includes(filterValue));
   }
-
 
   openMenu() {
     this.trigger.openMenu();

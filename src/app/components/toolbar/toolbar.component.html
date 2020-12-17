@@ -3,11 +3,13 @@
         aria-label="Example icon-button with menu icon">
         <mat-icon>menu</mat-icon>
     </button>
-    <span *ngIf="!isSmallScreen">Covid19 - Statistics</span>
+    <span *ngIf="!isSmallScreen">COVID19 - STATS</span>
     <span class="align-space"></span>
-    <mat-form-field class="example-full-width">
-        <input type="text" placeholder="Pick one country" aria-label="Number" matInput [formControl]="myControl"
+    <mat-form-field class="example-full-width" floatLabel="never">
+        <input type="text" aria-label="Number" matInput [formControl]="myControl"
             [matAutocomplete]="auto">
+            <mat-placeholder class="placeholder">Search country</mat-placeholder>
+
         <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectHandler($event)">
             <mat-option *ngFor="let country of filteredCountries | async" [value]="country.country">
                 {{country.country}}

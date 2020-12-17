@@ -1,37 +1,63 @@
 <div fxLayout="row" fxLayoutAlign="center center" *ngIf="selectedCountry.length !== 0 && !loading" class="d-flex">
-    <img width="110px" [src]="flag" class="nation-flag mat-elevation-z1">
+    <img width="110px" [src]="flag" class="nation-flag mat-elevation-z4">
     <div>
-        <h3 class="mat-display-1 mat-h3">{{ selectedCountryName }}</h3>
+        <h3 class="country-name font-bold">{{ selectedCountryName }}</h3>
+        <p>Population: <b>{{ population | number }}</b></p>
+        <p>Total tested population: <b>{{ tests | number }}</b></p>
+        <p>Cases per milion: <b>{{ casesPerMilion | number }}</b></p>
     </div>
 </div>
+<div fxLayoutAlign="center center">
+    <button mat-raised-button (click)="reset()" *ngIf="selectedCountry.length !== 0 && !loading">Get world
+        stats</button>
+</div>
 
-<div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="!loading" class="mt-10 d-flex">
-    <mat-card class="content-card mt-10">
+<div fxLayout="row" fxLayoutAlign="space-around center cases" *ngIf="!loading" class="mt-10 d-flex">
+    <mat-card class="content-card mt-10 mat-elevation-z0 total">
         <mat-card-header>
-            <mat-card-title>Total cases</mat-card-title>
-            <mat-card-subtitle>{{ casesWorld | number }} <div class="d-inline" matTooltip="Today cases">(+{{ todayCases
-                    | number }})</div>
+            <mat-card-title>TOTAL CASES</mat-card-title>
+            <mat-card-subtitle>
+                <div class="today" matTooltip="Today cases">+ {{ todayCases | number }}</div>
+                <b>{{ casesWorld | number }}</b>
             </mat-card-subtitle>
         </mat-card-header>
     </mat-card>
-    <mat-card class="content-card mt-10">
+    <mat-card class="content-card mt-10 mat-elevation-z0 active">
         <mat-card-header>
-            <mat-card-title>Active cases</mat-card-title>
-            <mat-card-subtitle>{{ activeWorld | number }}</mat-card-subtitle>
+            <mat-card-title>ACTIVE CASES</mat-card-title>
+            <mat-card-subtitle>
+                <div class="today"></div>
+                <b>{{ activeWorld | number }}</b>
+            </mat-card-subtitle>
         </mat-card-header>
     </mat-card>
-    <mat-card class="content-card mt-10">
+    <mat-card class="content-card mt-10 mat-elevation-z0 recovered">
         <mat-card-header>
-            <mat-card-title>Recovered</mat-card-title>
-            <mat-card-subtitle>{{ recoveredWorld | number }}</mat-card-subtitle>
+            <mat-card-title>RECOVERED</mat-card-title>
+            <mat-card-subtitle>
+                <div class="today" matTooltip="Today recovered">+ {{ todayRecovered | number }}</div>
+                <b>{{ recoveredWorld | number }}</b>
+            </mat-card-subtitle>
         </mat-card-header>
     </mat-card>
-    <mat-card class="content-card mt-10">
+    <mat-card class="content-card mt-10 mat-elevation-z0 deaths">
         <mat-card-header>
-            <mat-card-title>Deaths</mat-card-title>
-            <mat-card-subtitle>{{ deathsWorld | number }}</mat-card-subtitle>
+            <mat-card-title>DEATHS</mat-card-title>
+            <mat-card-subtitle>
+                <div class="today" matTooltip="Today deaths">+ {{ todayDeaths | number }}</div>
+                <b>{{ deathsWorld | number }}</b>
+            </mat-card-subtitle>
         </mat-card-header>
     </mat-card>
+</div>
+<div fxLayout class="mt-10" *ngIf="selectedCountry.length !== 0 && !loading">
+    <div>
+        <h2 class="text-center">Last 10 days</h2>
+        <ngx-charts-bar-vertical (window:resize)="onResize($event)" [view]="view" [scheme]="colorScheme" [results]="results" [gradient]="gradient"
+            [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel">
+        </ngx-charts-bar-vertical>
+    </div>
 </div>
 <div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="loading" class="mt-10">
     <mat-spinner></mat-spinner>

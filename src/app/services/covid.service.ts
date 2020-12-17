@@ -28,4 +28,8 @@ export class CovidService {
     return this.http.get(this.base_url + 'v3/covid-19/countries/' + country);
   }
 
+  historicalDataByCountry(country) {
+    return this.http.get(this.base_url + 'v3/covid-19/historical/' + country);
+  }
+
 }

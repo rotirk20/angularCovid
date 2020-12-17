@@ -6,11 +6,46 @@ img.nation-flag {
   width: 110px;
   border-radius: 100%;
   object-fit: cover;
-  margin-right:20px;
+  margin-right: 20px;
+  height: 110px;
 }
 
-@media screen and(max-width:720px) {
+h3.country-name {
+  border-bottom: 1px solid #d3d3d3;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+.mat-card-header .mat-card-title {
+  font-size: 15px!important;
+}
+.today {
+  margin: 5px 0px;
+  min-height: 20px;
+}
+
+@media only screen and(max-width:720px) {
   img.nation-flag {
-    margin-right: 0;
+    margin-right: 0px;
   }
+}
+
+.deaths {
+  background-color: #80808063;
+  transition: 0.3s;
+}
+.active {
+  background-color: #ffbc0047;
+  transition: 0.3s;
+}
+.total {
+  background-color: #fd00003b;
+  transition: 0.3s;
+}
+.total:hover {
+  background-color: #fd000061;
+  transition: 0.3s;
+}
+.recovered {
+  background-color: #0080004a;
+  transition: 0.3s;
 }

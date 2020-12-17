@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CovidService } from './services/covid.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { SideNavComponent } from './components/side-nav/side-nav.component';
     FlexLayoutModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxChartsModule
   ],
   providers: [CovidService],
   bootstrap: [AppComponent]
